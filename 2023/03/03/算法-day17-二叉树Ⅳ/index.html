@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>算法|day17 二叉树Ⅳ | YangFan's blog</title><meta name="author" content="Yang Fan"><meta name="copyright" content="Yang Fan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="leetcode110. 平衡二叉树 给定一个二叉树，判断它是否是高度平衡的二叉树。 本题中，一棵高度平衡二叉树定义为：  一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。  还是一道简单题之前类型差不多，用递归解决比较简单，递归三部曲： 1.判断返回值和参数 1int geth(TreeNode *node)  2.停止条件 1if(!node) return 0;  3.单层逻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法|day17 二叉树Ⅳ">
+<meta property="og:url" content="http://example.com/2023/03/03/%E7%AE%97%E6%B3%95-day17-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A3/index.html">
+<meta property="og:site_name" content="YangFan&#39;s blog">
+<meta property="og:description" content="leetcode110. 平衡二叉树 给定一个二叉树，判断它是否是高度平衡的二叉树。 本题中，一棵高度平衡二叉树定义为：  一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。  还是一道简单题之前类型差不多，用递归解决比较简单，递归三部曲： 1.判断返回值和参数 1int geth(TreeNode *node)  2.停止条件 1if(!node) return 0;  3.单层逻">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-03-03T04:32:56.290Z">
+<meta property="article:modified_time" content="2023-03-03T11:21:40.527Z">
+<meta property="article:author" content="Yang Fan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/03/03/%E7%AE%97%E6%B3%95-day17-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '算法|day17 二叉树Ⅳ',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-03-03 19:21:40'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="YangFan's blog"><span class="site-name">YangFan's blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">算法|day17 二叉树Ⅳ</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-03T04:32:56.290Z" title="发表于 2023-03-03 12:32:56">2023-03-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-03T11:21:40.527Z" title="更新于 2023-03-03 19:21:40">2023-03-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法|day17 二叉树Ⅳ"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/balanced-binary-tree/description/">leetcode110. 平衡二叉树</a></p>
+<p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
+<p>本题中，一棵高度平衡二叉树定义为：</p>
+<blockquote>
+<p>一个二叉树<em>每个节点</em> 的左右两个子树的高度差的绝对值不超过 1 。</p>
+</blockquote>
+<p>还是一道简单题之前类型差不多，用递归解决比较简单，递归三部曲：</p>
+<p>1.判断返回值和参数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">geth</span><span class="params">(TreeNode *node)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>2.停止条件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!node) <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>3.单层逻辑，采用后序遍历，如果相差大于1就返回-1，如果有子树为-1就一直返回-1即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> left = <span class="built_in">geth</span>(node-&gt;left);</span><br><span class="line">      <span class="keyword">if</span>(left == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="type">int</span> right = <span class="built_in">geth</span>(node-&gt;right);</span><br><span class="line">      <span class="keyword">if</span>(right == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">if</span>(left-right&gt;<span class="number">1</span> || right -left &gt;<span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>+<span class="built_in">max</span>(left,right);</span><br></pre></td></tr></table></figure>
+
+<p>全部代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">geth</span><span class="params">(TreeNode *node)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!node) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> left = <span class="built_in">geth</span>(node-&gt;left);</span><br><span class="line">        <span class="keyword">if</span>(left == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> right = <span class="built_in">geth</span>(node-&gt;right);</span><br><span class="line">        <span class="keyword">if</span>(right == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(left-right&gt;<span class="number">1</span> || right -left &gt;<span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>+<span class="built_in">max</span>(left,right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isBalanced</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">geth</span>(root) == <span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-paths/description/">leetcode257. 二叉树的所有路径</a></p>
+<p>给你一个二叉树的根节点 <code>root</code> ，按 <strong>任意顺序</strong> ，返回所有从根节点到叶子节点的路径。</p>
+<p><strong>叶子节点</strong> 是指没有子节点的节点。</p>
+<p>这是道简单题，真离谱，这道题要采用前序遍历比较方便使用递归三部曲分析</p>
+<p>1.确定返回值的参数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">getrule</span><span class="params">(TreeNode *node,vector&lt;<span class="type">int</span>&gt;&amp; v,vector&lt;string&gt;&amp; result)</span>  <span class="comment">//v是一条路径的全部值 result是返回特殊的-&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>2.结束循环的条件 是一个节点阿左右节点都为空，就把这个路径结束 将v加工放到string容器中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">      &#123;</span><br><span class="line">          string s;</span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i&lt;v.<span class="built_in">size</span>()<span class="number">-1</span>;i++)</span><br><span class="line">          &#123;</span><br><span class="line">              s+=<span class="built_in">to_string</span>(v[i]);</span><br><span class="line">              s+=<span class="string">&quot;-&gt;&quot;</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          s+=<span class="built_in">to_string</span>(v[v.<span class="built_in">size</span>()<span class="number">-1</span>]);</span><br><span class="line">          result.<span class="built_in">push_back</span>(s);</span><br><span class="line">          <span class="keyword">return</span> ;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.单层逻辑，要先把当前节点放入v中，因为若判断没有子节点 就return了少了当前节点，在遍历后要pop 是因为要回溯到root节点 继续搜索。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">v.<span class="built_in">push_back</span>(node-&gt;val);   </span><br><span class="line">     <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">     &#123;</span><br><span class="line">         string s;</span><br><span class="line">         <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i&lt;v.<span class="built_in">size</span>()<span class="number">-1</span>;i++)</span><br><span class="line">         &#123;</span><br><span class="line">             s+=<span class="built_in">to_string</span>(v[i]);</span><br><span class="line">             s+=<span class="string">&quot;-&gt;&quot;</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         s+=<span class="built_in">to_string</span>(v[v.<span class="built_in">size</span>()<span class="number">-1</span>]);</span><br><span class="line">         result.<span class="built_in">push_back</span>(s);</span><br><span class="line">         <span class="keyword">return</span> ;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span>(node-&gt;left)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="built_in">getrule</span>(node-&gt;left,v,result);</span><br><span class="line">         v.<span class="built_in">pop_back</span>();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">if</span>(node-&gt;right)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="built_in">getrule</span>(node-&gt;right,v,result);</span><br><span class="line">         v.<span class="built_in">pop_back</span>();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">getrule</span><span class="params">(TreeNode *node,vector&lt;<span class="type">int</span>&gt;&amp; v,vector&lt;string&gt;&amp; result)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        v.<span class="built_in">push_back</span>(node-&gt;val);   </span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left == <span class="literal">NULL</span> &amp;&amp; node-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            string s;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i&lt;v.<span class="built_in">size</span>()<span class="number">-1</span>;i++)</span><br><span class="line">            &#123;</span><br><span class="line">                s+=<span class="built_in">to_string</span>(v[i]);</span><br><span class="line">                s+=<span class="string">&quot;-&gt;&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s+=<span class="built_in">to_string</span>(v[v.<span class="built_in">size</span>()<span class="number">-1</span>]);</span><br><span class="line">            result.<span class="built_in">push_back</span>(s);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node-&gt;left)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">getrule</span>(node-&gt;left,v,result);</span><br><span class="line">            v.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;right)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">getrule</span>(node-&gt;right,v,result);</span><br><span class="line">            v.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">binaryTreePaths</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">        vector&lt;string&gt; result;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">nullptr</span>) <span class="keyword">return</span> result;</span><br><span class="line">        <span class="built_in">getrule</span>(root,v,result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Yang Fan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/03/%E7%AE%97%E6%B3%95-day17-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A3/">http://example.com/2023/03/03/%E7%AE%97%E6%B3%95-day17-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">YangFan's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/03/02/%E7%AE%97%E6%B3%95-day16-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A2/" title="算法|day16 二叉树Ⅲ"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法|day16 二叉树Ⅲ</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yang Fan</div><div class="author-info__description">LC Algorithm blog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YangFan77"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">NWAFU_MASTER SLAM</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/03/%E7%AE%97%E6%B3%95-day17-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A3/" title="算法|day17 二叉树Ⅳ">算法|day17 二叉树Ⅳ</a><time datetime="2023-03-03T04:32:56.290Z" title="发表于 2023-03-03 12:32:56">2023-03-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/02/%E7%AE%97%E6%B3%95-day16-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A2/" title="算法|day16 二叉树Ⅲ">算法|day16 二叉树Ⅲ</a><time datetime="2023-03-02T06:53:39.034Z" title="发表于 2023-03-02 14:53:39">2023-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/01/%E7%AE%97%E6%B3%95-day15-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A1/" title="算法|day15 二叉树Ⅱ">算法|day15 二叉树Ⅱ</a><time datetime="2023-03-01T08:01:28.000Z" title="发表于 2023-03-01 16:01:28">2023-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/28/%E7%AE%97%E6%B3%95-day14-%E4%BA%8C%E5%8F%89%E6%A0%91/" title="算法|day14">算法|day14</a><time datetime="2023-02-28T12:31:25.063Z" title="发表于 2023-02-28 20:31:25">2023-02-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/27/%E7%AE%97%E6%B3%95-day13-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A2/" title="算法|day13 栈和队列Ⅲ">算法|day13 栈和队列Ⅲ</a><time datetime="2023-02-27T07:40:39.299Z" title="发表于 2023-02-27 15:40:39">2023-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Yang Fan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

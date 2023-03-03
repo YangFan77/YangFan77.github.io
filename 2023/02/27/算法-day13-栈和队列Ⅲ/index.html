@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>算法|day13 栈和队列Ⅲ | YangFan's blog</title><meta name="author" content="Yang Fan"><meta name="copyright" content="Yang Fan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="leetcode239. 滑动窗口最大值 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。 返回 滑动窗口中的最大值 。 这个题应该用队列维护当前滑动窗口最大值，先把k个值放入队列，在放入队列时，如果当前值大于前面的值，前面出队，之后判断队列的大小是否符合k即可 1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法|day13 栈和队列Ⅲ">
+<meta property="og:url" content="http://example.com/2023/02/27/%E7%AE%97%E6%B3%95-day13-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A2/index.html">
+<meta property="og:site_name" content="YangFan&#39;s blog">
+<meta property="og:description" content="leetcode239. 滑动窗口最大值 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。 返回 滑动窗口中的最大值 。 这个题应该用队列维护当前滑动窗口最大值，先把k个值放入队列，在放入队列时，如果当前值大于前面的值，前面出队，之后判断队列的大小是否符合k即可 1234567891011">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-02-27T07:40:39.299Z">
+<meta property="article:modified_time" content="2023-02-27T09:34:13.170Z">
+<meta property="article:author" content="Yang Fan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/02/27/%E7%AE%97%E6%B3%95-day13-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '算法|day13 栈和队列Ⅲ',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-27 17:34:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="YangFan's blog"><span class="site-name">YangFan's blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">算法|day13 栈和队列Ⅲ</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-27T07:40:39.299Z" title="发表于 2023-02-27 15:40:39">2023-02-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-27T09:34:13.170Z" title="更新于 2023-02-27 17:34:13">2023-02-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法|day13 栈和队列Ⅲ"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/description/">leetcode239. 滑动窗口最大值</a></p>
+<p>给你一个整数数组 <code>nums</code>，有一个大小为 <code>k</code> 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 <code>k</code> 个数字。滑动窗口每次只向右移动一位。</p>
+<p>返回 <em>滑动窗口中的最大值</em> 。</p>
+<p>这个题应该用队列维护当前滑动窗口最大值，先把k个值放入队列，在放入队列时，如果当前值大于前面的值，前面出队，之后判断队列的大小是否符合k即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(nums[<span class="number">0</span>]);</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;k;i++)</span><br><span class="line">        &#123;</span><br><span class="line">             <span class="keyword">while</span>(nums[i]&gt;q.<span class="built_in">front</span>()&amp;&amp;!q.<span class="built_in">empty</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                q.<span class="built_in">pop</span>();  </span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            q.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">            </span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        v.<span class="built_in">push_back</span>(q.<span class="built_in">front</span>());</span><br><span class="line">        <span class="keyword">while</span>(i&lt;nums.<span class="built_in">size</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(nums[i]&gt;q.<span class="built_in">front</span>()&amp;&amp;!q.<span class="built_in">empty</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                q.<span class="built_in">pop</span>();  </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span>(q.<span class="built_in">empty</span>())</span><br><span class="line">                q.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(q.<span class="built_in">size</span>()&lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                q.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(q.<span class="built_in">size</span>()==k)</span><br><span class="line">            &#123;</span><br><span class="line">                q.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">while</span>(nums[i]&gt;q.<span class="built_in">front</span>()&amp;&amp;!q.<span class="built_in">empty</span>())</span><br><span class="line">                &#123;</span><br><span class="line">                    q.<span class="built_in">pop</span>();  </span><br><span class="line">                &#125;</span><br><span class="line">                q.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            v.<span class="built_in">push_back</span>(q.<span class="built_in">front</span>());</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nums =[<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">5</span>]</span><br><span class="line">k =<span class="number">3</span></span><br><span class="line"><span class="number">27</span> / <span class="number">51</span> 个通过的测试用例</span><br><span class="line">输出[<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>]</span><br><span class="line">预期结果[<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<p>当遇到这种情况，代码就会过不去，因为代码判断队列前面是否小于当前值，没有判断其他，显然在3走后，0&lt;1但是没有判断1&lt;2的情况，所以这道题应该使用双端队列去维护。也就是deque。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Myque</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        deque&lt;<span class="type">int</span>&gt; dq;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">pop</span><span class="params">(<span class="type">int</span> value)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!dq.<span class="built_in">empty</span>()&amp;&amp;value==dq.<span class="built_in">front</span>())  <span class="comment">//如果去除的不是当前队列头 就不管。</span></span><br><span class="line">            &#123;</span><br><span class="line">                dq.<span class="built_in">pop_front</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> value)</span>   <span class="comment">//和前面的区别就是 从后往前判断，不会出现刚才哪个bug</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(!dq.<span class="built_in">empty</span>()&amp;&amp;value&gt;dq.<span class="built_in">back</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                dq.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            dq.<span class="built_in">push_back</span>(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">front</span><span class="params">()</span>  <span class="comment">//返回队列前</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> dq.<span class="built_in">front</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">        Myque mq;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(;i&lt;k;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            mq.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        v.<span class="built_in">push_back</span>(mq.<span class="built_in">front</span>());</span><br><span class="line">        <span class="keyword">for</span>(;i&lt;nums.<span class="built_in">size</span>();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            mq.<span class="built_in">pop</span>(nums[i-k]);  <span class="comment">//移除该移除的</span></span><br><span class="line">            mq.<span class="built_in">push</span>(nums[i]);	<span class="comment">//添加该添加的</span></span><br><span class="line">            v.<span class="built_in">push_back</span>(mq.<span class="built_in">front</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/description/">leetcode347. 前 K 个高频元素</a></p>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你返回其中出现频率前 <code>k</code> 高的元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p><strong>进阶：</strong>你所设计算法的时间复杂度 <strong>必须</strong> 优于 <code>O(n log n)</code> ，其中 <code>n</code> 是数组大小。</p>
+<p>这个其实可以直接使用map去存，然后按照value值去排序，输出前k个key放入vector返回，主要是如何根据value排序。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">topKFrequent</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i:nums)</span><br><span class="line">        &#123;</span><br><span class="line">            m[i]++;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; v;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; vv;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = m.<span class="built_in">begin</span>();it!=m.<span class="built_in">end</span>();it++)  <span class="comment">//先把map放入vector  一定是make_pair存</span></span><br><span class="line">        &#123;</span><br><span class="line">            v.<span class="built_in">push_back</span>(<span class="built_in">make_pair</span>(it-&gt;first,it-&gt;second));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>(),                       <span class="comment">//sort可以用lambda 也可以仿函数写</span></span><br><span class="line">        []( pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &amp;x,  pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; &amp;y)   <span class="comment">//lambda  判断</span></span><br><span class="line">        &#123;<span class="keyword">return</span> x.second &gt; y.second;&#125;);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;k;i++)             <span class="comment">//最后输出k个就可以。</span></span><br><span class="line">        &#123;</span><br><span class="line">            vv.<span class="built_in">push_back</span>(v[i].first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这是基本O（nlogn）时间复杂度，如何优于这个复杂度1呢，使用优先级队列就可以完成。时间复杂度为O（nlogk），小根堆 一直pop的是最小的元素 所以采用小根堆 留下的就是最大的k</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    class mycom   //仿函数</span><br><span class="line">    &#123;</span><br><span class="line">    public:</span><br><span class="line">        bool operator()(const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b)</span><br><span class="line">        &#123;</span><br><span class="line">            return a.second&gt;b.second;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; topKFrequent(vector&lt;int&gt;&amp; nums, int k) &#123;</span><br><span class="line">        unordered_map&lt;int,int&gt;m;</span><br><span class="line">        for(int i:nums)</span><br><span class="line">        &#123;</span><br><span class="line">            m[i]++;</span><br><span class="line">        &#125;</span><br><span class="line">        priority_queue&lt;pair&lt;int,int&gt;,vector&lt;pair&lt;int,int&gt;&gt;,</span><br><span class="line">       mycom&gt; prq;   // 类型 容器 仿函数 不写默认为大根堆</span><br><span class="line">        for(auto it = m.begin();it!=m.end();it++)</span><br><span class="line">        &#123;</span><br><span class="line">            prq.push(*it);</span><br><span class="line">            if(prq.size()&gt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                prq.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;int&gt; v(k);</span><br><span class="line">        for(int i = k-1;i&gt;=0;i--)   //因为小根堆 最上面为小 所以反着来</span><br><span class="line">        &#123;</span><br><span class="line">            v[i] = prq.top().first;</span><br><span class="line">            prq.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Yang Fan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/02/27/%E7%AE%97%E6%B3%95-day13-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A2/">http://example.com/2023/02/27/%E7%AE%97%E6%B3%95-day13-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">YangFan's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/28/%E7%AE%97%E6%B3%95-day14-%E4%BA%8C%E5%8F%89%E6%A0%91/" title="算法|day14"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">算法|day14</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/26/%E7%AE%97%E6%B3%95-day11-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A1/" title="算法|day11 栈和队列Ⅱ"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法|day11 栈和队列Ⅱ</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yang Fan</div><div class="author-info__description">LC Algorithm blog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YangFan77"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">NWAFU_MASTER SLAM</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/03/%E7%AE%97%E6%B3%95-day17-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A3/" title="算法|day17 二叉树Ⅳ">算法|day17 二叉树Ⅳ</a><time datetime="2023-03-03T04:32:56.290Z" title="发表于 2023-03-03 12:32:56">2023-03-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/02/%E7%AE%97%E6%B3%95-day16-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A2/" title="算法|day16 二叉树Ⅲ">算法|day16 二叉树Ⅲ</a><time datetime="2023-03-02T06:53:39.034Z" title="发表于 2023-03-02 14:53:39">2023-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/01/%E7%AE%97%E6%B3%95-day15-%E4%BA%8C%E5%8F%89%E6%A0%91%E2%85%A1/" title="算法|day15 二叉树Ⅱ">算法|day15 二叉树Ⅱ</a><time datetime="2023-03-01T08:01:28.000Z" title="发表于 2023-03-01 16:01:28">2023-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/28/%E7%AE%97%E6%B3%95-day14-%E4%BA%8C%E5%8F%89%E6%A0%91/" title="算法|day14">算法|day14</a><time datetime="2023-02-28T12:31:25.063Z" title="发表于 2023-02-28 20:31:25">2023-02-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/27/%E7%AE%97%E6%B3%95-day13-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E2%85%A2/" title="算法|day13 栈和队列Ⅲ">算法|day13 栈和队列Ⅲ</a><time datetime="2023-02-27T07:40:39.299Z" title="发表于 2023-02-27 15:40:39">2023-02-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Yang Fan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
